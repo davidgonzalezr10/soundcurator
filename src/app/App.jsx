@@ -1,4 +1,4 @@
-import Tracklist from '../components/Tracklist'
+import SearchResults from '../components/SearchResults'
 import SearchBar from '../components/SearchBar'
 import Playlist from '../components/Playlist'
 
@@ -26,7 +26,7 @@ function App() {
         <p>Search, curate, sync. The simplest way to create your Spotify playlists.</p>
       </div>
       <SearchBar />
-      <Tracklist tracks={tracks} />
+      <SearchResults tracks={tracks} />
       <Playlist />
     </div>
   )

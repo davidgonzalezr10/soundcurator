@@ -1,10 +1,17 @@
-import Track from './Track'
 import React from 'react'
+import Track from './Track'
 
-const Tracklist = () => {
+const Tracklist = ({ tracks }) => {
+   
+    if (!Array.isArray(tracks) || tracks.length === 0) {
+        return <p>Time to start curating!</p>;
+    }
+
     return (
         <div>
-            <Track />
+            {tracks.map(track => (
+                <Track key={track.id} track={track} />
+            ))}
         </div>
     )
 }

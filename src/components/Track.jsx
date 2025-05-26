@@ -1,11 +1,15 @@
 import React from 'react';
 
-const Track = () => {
+const Track = ({ track }) => {
     return (
         <div>
-            <h3>Track Name</h3>
-            <h4>Artist</h4>
-            <p>Album</p>
+            <img 
+                src={track.image}
+                alt={track.name}
+            />
+            <h3>{track.name}</h3>
+            <h4>{track.artist}</h4>
+            <p>{track.album}</p>
         </div>
     )
 }
