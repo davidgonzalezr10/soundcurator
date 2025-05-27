@@ -2,9 +2,6 @@ import SearchResults from '../components/SearchResults'
 import SearchBar from '../components/SearchBar'
 import Playlist from '../components/Playlist'
 
-import React from 'react'
-import './App.css'
-
 
 const trackObject = {
   name: 'Safe',
@@ -20,10 +17,11 @@ const tracks = [trackObject, trackObject, trackObject, trackObject, trackObject,
 function App() {
 
   return (
-    <div>
-      <div>
-        <h1>SoundCurator</h1>
-        <p>Search, curate, sync. The simplest way to create your Spotify playlists.</p>
+    <div className="pt-14 pb-10 bg-white">
+      <div className="px-6 pb-8 w-full flex-1 justify-center align-middle text-center">
+        <h1 className="pb-6 text-4xl font-DM-sans font-extrabold lg:text-7xl text-spoti-green">SoundCurator</h1>
+        <p className="text-dark-grey font-bold lg:text-xl lg:mt-4 mb-1">Search, curate, sync.</p>
+        <p className="text-sm lg:text-lg text-dark-grey font-light">The simplest way to create your Spotify playlists</p>
       </div>
       <SearchBar />
       <SearchResults tracks={tracks} />

@@ -1,15 +1,19 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@import "tailwindcss";
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@theme {
+
+  --color-light-grey: #F7F7F7;
+  --color-mid-grey: #2E2E2E;
+  --color-dark-grey: #242424;
+  --color-spoti-green: #4AC155;
+  --color-dark-green: #35833C;
+
+  --font-DM-sans: "DM Sans", sans-serif;
+
 }
+
+
 
 

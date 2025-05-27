@@ -53,7 +53,7 @@ const Playlist = () => {
                         onChange={changePlaylistName}
                     />               
                     <button onClick={togglePlaylist} disabled={!playlistName}>
-                       Create Playlist
+                       +
                     </button>
                 </div>
             ) : (
