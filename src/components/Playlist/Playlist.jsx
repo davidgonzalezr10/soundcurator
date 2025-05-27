@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Tracklist  from './Tracklist'
+import Tracklist  from '../Tracklist'
+import PlaylistOn from './PlaylistOn'
 
 const mockPlaylist = {
     name: 'Afro Deep',
@@ -43,7 +44,7 @@ const Playlist = () => {
 
 
     return (
-        <div>
+        <section>
             {playlistActive === false ? (
                 <div>
                     <h2>Start curating</h2>
@@ -57,13 +58,9 @@ const Playlist = () => {
                     </button>
                 </div>
             ) : (
-                <div>
-                    <h2>{playlistName || 'Your playlist'}</h2> {/* Display playlist name */}
-                    <Tracklist tracks={playlistTracks} />
-                    <button>Sync to Spotify</button>
-                </div>
+                <PlaylistOn playlistName={playlistName} playlistTracks={playlistTracks} />
             )}
-        </div>
+        </section>
     )
 }
 

@@ -1,28 +1,32 @@
 import SearchResults from '../components/SearchResults'
 import SearchBar from '../components/SearchBar'
 import Header from '../components/Header'
-import Playlist from '../components/Playlist'
+import Nav from '../components/Nav'
+import Playlist from '../components/Playlist/Playlist'
 
 
 const trackObject = {
-  name: 'Safe',
-  artist: 'Monkey Safari',
-  album: 'Safe',
+  name: 'Born To Be Wild aaaaaaaaaaaaa',
+  artist: 'Monkey Safari aaaaaaaaaaaa',
+  album: 'Safe aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   image: 'https://f4.bcbits.com/img/a2256888722_10.jpg',
   id: '2364'
 }
 
-const tracks = [trackObject, trackObject, trackObject, trackObject, trackObject, trackObject]
+const tracks = [trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject, trackObject]
 
 
 function App() {
 
   return (
-    <div className="pt-16 pb-10 lg:pt-20 bg-white">
+    <div className="pb-10 bg-white">
+      <Nav />
       <Header />
-      <SearchBar />
-      <SearchResults tracks={tracks} />
-      <Playlist />
+      <main> 
+        <SearchBar />
+        <SearchResults tracks={tracks} />
+        <Playlist />
+      </main>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 const SearchBar = () => {
     return (
-        <div className="mt-6 mb-15">
+        <section className="mt-6 mb-5 lg:mb-10">
             <form className="mx-6 lg:mx-auto lg:max-w-[800px]">
                 <div className="flex flex-col">
                     <select 
@@ -12,7 +12,7 @@ const SearchBar = () => {
                         <option value="artists">Artists</option>
                         <option value="genres">Genres</option>
                     </select>
-                    <div className="text-sm lg:text-base bg-gray-100 py-4 px-4 lg:px-6 lg:py-6 flex gap-3 rounded-lg">
+                    <div className="text-sm lg:text-base bg-gray-100 py-4 px-4 lg:px-6 lg:py-6 flex gap-3 rounded-lg shadow">
                         <input 
                             type="text"
                             placeholder="Find songs" 
@@ -27,7 +27,7 @@ const SearchBar = () => {
                     </div>
                 </div>
             </form>
-        </div>
+        </section>
     )
 }
 
