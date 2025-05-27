@@ -2,7 +2,7 @@ import React from 'react'
 
 const SearchBar = () => {
     return (
-        <div className="mt-6 mb-15 lg:mt-2">
+        <div className="mt-6 mb-15">
             <form className="mx-6 lg:mx-auto lg:max-w-[800px]">
                 <div className="flex flex-col">
                     <select 
