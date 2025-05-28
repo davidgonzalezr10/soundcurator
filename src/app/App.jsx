@@ -19,7 +19,7 @@ const tracks = [trackObject, trackObject, trackObject, trackObject, trackObject,
 function App() {
 
   return (
-    <div className="pb-10 bg-white">
+    <div className="pb-30 bg-white">
       <Nav />
       <Header />
       <main> 

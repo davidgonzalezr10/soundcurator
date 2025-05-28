@@ -12,7 +12,7 @@ const SearchBar = () => {
                         <option value="artists">Artists</option>
                         <option value="genres">Genres</option>
                     </select>
-                    <div className="text-sm lg:text-base bg-gray-100 py-4 px-4 lg:px-6 lg:py-6 flex gap-3 rounded-lg shadow">
+                    <div className="lg:text-base bg-gray-100 py-4 px-4 lg:px-6 lg:py-6 flex gap-3 rounded-lg shadow">
                         <input 
                             type="text"
                             placeholder="Find songs" 

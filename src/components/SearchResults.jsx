@@ -1,4 +1,4 @@
-import Track from './Track'
+import TracklistSearch from './Tracklist/TracklistSearch'
 import React, { useState, useEffect } from 'react'
 
 const SearchResults = ({ tracks }) => {
@@ -13,14 +13,8 @@ const SearchResults = ({ tracks }) => {
 
 
     return (
-        <section className="flex justify-center bg-white border border-gray-400 rounded-lg mx-6 lg:mx-18 h-[350px] hidden">
-            <div className="max-w-8xl overflow-y-auto p-6">
-                <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 lg:gap-4">
-                    {searchResults.map(track => (
-                        <Track key={track.id} track={track} />
-                    ))}
-                </div>
-            </div>
+        <section className="flex justify-center bg-white border border-gray-400 rounded-lg mx-6 lg:mx-56 lg:mb-16 h-[350px]">
+            <TracklistSearch searchResults={searchResults} />
         </section>
     )
 }
