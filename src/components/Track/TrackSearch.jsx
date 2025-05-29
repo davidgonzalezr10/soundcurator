@@ -13,9 +13,7 @@ const TrackSearch = ({ track, onTrackSelect, playlistActive, playlistTracks }) =
     const handleClick = () => {
         if (!isInPlaylist) {
             onTrackSelect(track);
-        } else {
-            console.log('Track already in playlist:', track.name);
-        }
+        } 
     }
 
     return (

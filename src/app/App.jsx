@@ -3,6 +3,7 @@ import SearchBar from '../components/SearchBar'
 import Header from '../components/Header'
 import Nav from '../components/Nav'
 import Playlist from '../components/Playlist/Playlist'
+import ExportMessage from './ExportMessage'
 import { useState, useEffect } from 'react'
 
 
@@ -33,6 +34,14 @@ const tracksObject = {
         id: '3',
         uri: 'spotify:track:4tCOKaXWHABZ7siVyPIkME'
       },
+      {
+        name: 'EO',
+        artist: 'sunflwr',
+        album: 'EO',
+        image: 'https://i1.sndcdn.com/artworks-V0Gp7DTEaiyIVXhR-dhuBvg-t500x500.png',
+        id: '4',
+        uri: 'spotify:track:4tCOKaXWHABZ7siVyPIkME'
+      },
     ]
 }
 
@@ -42,6 +51,27 @@ function App() {
   const [selectedTrack, setSelectedTrack] = useState(null)
   const [playlistActive, setPlaylistActive] = useState(false)
   const [playlistTracks, setPlaylistTracks] = useState([])
+  const [playlistName, setPlaylistName] = useState('')
+  const [trackUris, setTrackUris] = useState([])
+  const [exportMessage, setExportMessage] = useState('')
+
+  const handlePlaylistExport = () => {
+    const uris = playlistTracks.map(track => track.uri)
+    if (playlistTracks.length > 0 ) {
+      setTrackUris(uris)
+      setPlaylistName('')
+      setPlaylistTracks([])
+      setPlaylistActive(false)
+      setExportMessage('Playlist exported successfully!')
+    } else {
+      alert('Add at least 1 track to export')
+    }
+    
+    // Remove message after 5 seconds
+    setTimeout(() => {
+      setExportMessage('')
+    }, 3000)
+  }
 
   const handleTrackSelect = (track) => {
     setSelectedTrack(track)
@@ -80,7 +110,11 @@ function App() {
           setPlaylistActive={setPlaylistActive}
           playlistTracks={playlistTracks}
           setPlaylistTracks={setPlaylistTracks}
+          playlistName={playlistName}
+          setPlaylistName={setPlaylistName}
+          onExport={handlePlaylistExport}
         />
+        <ExportMessage message={exportMessage} />
       </main>
     </div>
   )

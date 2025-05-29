@@ -2,7 +2,7 @@ import TracklistPlaylist from '../Tracklist/TracklistPlaylist'
 import { MdEdit } from "react-icons/md";
 import React, { useState } from 'react'
 
-const PlaylistOn = ({ playlistName, playlistTracks, handleRemoveTrack, changePlaylistName }) => {
+const PlaylistOn = ({ playlistName, playlistTracks, handleRemoveTrack, changePlaylistName, onExport }) => {
     
     const [isEditing, setIsEditing] = useState(false);
 
@@ -45,7 +45,12 @@ const PlaylistOn = ({ playlistName, playlistTracks, handleRemoveTrack, changePla
             </div>
             <TracklistPlaylist tracks={playlistTracks} handleRemoveTrack={handleRemoveTrack} />
             <div className="flex justify-center">
-                <button className="text-white font-bold lg:text-lg border bg-spoti-green border-spoti-green rounded-lg hover:cursor-pointer px-4 py-2">Sync to Spotify</button>
+                <button 
+                    onClick={onExport}
+                    className="text-white font-bold lg:text-lg border bg-spoti-green border-spoti-green rounded-lg hover:cursor-pointer px-4 py-2"
+                >
+                    Sync to Spotify
+                </button>
             </div>
         </div>
     );

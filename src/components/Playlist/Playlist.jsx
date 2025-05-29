@@ -2,49 +2,32 @@ import React, { useState, useEffect } from 'react'
 import PlaylistOn from './PlaylistOn'
 import PlaylistOff from './PlaylistOff'
 
-const mockPlaylist = {
-    name: 'Afro Deep',
-    tracks: [ 
-        {
-            name: 'Say No - Hardt Antoine Remix',
-            artist: 'Echonomist',
-            album: 'Say No',
-            image: 'https://geo-media.beatport.com/image_size/1400x1400/43689ba4-b423-4d3a-b342-3b0dcc024812.jpg',
-            id: '1'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '2'
-        },
-        {
-            name: 'Necessity',
-            artist: 'Rampa',
-            album: 'John Digweed Live In Brooklyn New York',
-            image: 'https://geo-media.beatport.com/image_size/1400x1400/5e3daf40-a373-4057-9ccf-761a325391dd.jpg',
-            id: '3'
-        },
-    ],
-}
 
-const Playlist = ({ newTrack, playlistActive, setPlaylistActive, playlistTracks, setPlaylistTracks }) => {
-    const [playlistName, setPlaylistName] = useState('')
+const Playlist = ({ newTrack, playlistActive, setPlaylistActive, playlistTracks, setPlaylistTracks, playlistName, setPlaylistName, onExport }) => {
 
     const handleRemoveTrack = (track) => {
         setPlaylistTracks(prevTracks => {
-            const newTracks = prevTracks.filter(currentTrack => 
+            // First filter out the removed track
+            const filteredTracks = prevTracks.filter(currentTrack => 
                 !(currentTrack.name === track.name && 
                   currentTrack.artist === track.artist && 
                   currentTrack.album === track.album)
             );
-            return newTracks;
+            
+            // Then reassign IDs to all remaining tracks
+            const tracksWithNewIds = filteredTracks.map((track, index) => ({
+                ...track,
+                id: (index + 1).toString()
+            }));
+
+            console.log('After removal - Track IDs:', tracksWithNewIds.map(t => ({ name: t.name, id: t.id })));
+            return tracksWithNewIds;
         });
     }
 
     useEffect(() => {
         if (newTrack) {
+            console.log('Adding new track:', newTrack.name);
             setPlaylistTracks(prevTracks => {
                 const trackExists = prevTracks.some(track => 
                     track.name === newTrack.name && 
@@ -57,8 +40,11 @@ const Playlist = ({ newTrack, playlistActive, setPlaylistActive, playlistTracks,
                         ...newTrack,
                         id: (prevTracks.length + 1).toString()
                     }
-                    return [...prevTracks, trackWithNewId];
+                    const newTracks = [...prevTracks, trackWithNewId];
+                    console.log('Track added successfully - Current playlist:', newTracks.map(t => ({ name: t.name, id: t.id })));
+                    return newTracks;
                 }
+                console.log('Track already exists in playlist');
                 return prevTracks;
             });
         }
@@ -89,7 +75,8 @@ const Playlist = ({ newTrack, playlistActive, setPlaylistActive, playlistTracks,
                     playlistName={playlistName} 
                     playlistTracks={playlistTracks} 
                     handleRemoveTrack={handleRemoveTrack}
-                    changePlaylistName={changePlaylistName} 
+                    changePlaylistName={changePlaylistName}
+                    onExport={onExport}
                 />
             )}
         </section>

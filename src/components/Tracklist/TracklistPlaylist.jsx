@@ -13,7 +13,7 @@ const TracklistPlaylist = ({ tracks, handleRemoveTrack }) => {
                      <p className="mr-[5rem]">Album</p>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto overflow-y-auto h-[450px] lg:h-[700px]">
+            <div className="max-w-7xl mx-auto overflow-y-auto h-full max-lg:max-h-[450px] lg:max-h-[650px]">
                 <div className="grid grid-cols-1 gap-3 lg:gap-0 w-full place-items-center">
                     {tracks.map(track => {
                         return (
