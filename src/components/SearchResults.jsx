@@ -1,7 +1,7 @@
 import TracklistSearch from './Tracklist/TracklistSearch'
 import React, { useState, useEffect } from 'react'
 
-const SearchResults = ({ tracks }) => {
+const SearchResults = ({ tracks, onTrackSelect, playlistActive, playlistTracks }) => {
 
     const [searchResults, setSearchResults] = useState([])
 
@@ -14,7 +14,12 @@ const SearchResults = ({ tracks }) => {
 
     return (
         <section className="flex justify-center bg-white border border-gray-400 rounded-lg mx-6 lg:mx-56 lg:mb-16 h-[350px]">
-            <TracklistSearch searchResults={searchResults} />
+            <TracklistSearch 
+                searchResults={searchResults} 
+                onTrackSelect={onTrackSelect}
+                playlistActive={playlistActive}
+                playlistTracks={playlistTracks}
+            />
         </section>
     )
 }

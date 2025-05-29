@@ -1,7 +1,9 @@
+import removeTrackIcon from '../../assets/remove-track.svg'
+import { IoIosRemoveCircle } from "react-icons/io"
+import { IoRemoveCircleOutline } from "react-icons/io5"
 import React from 'react';
-import removeTrackIcon from '../../assets/remove-track.svg';
 
-const TrackPlaylist = ({ track }) => {
+const TrackPlaylist = ({ track, handleRemoveTrack }) => {
     return (
         <div className="bg-gray-100 lg:bg-transparent text-dark-grey flex items-center w-full h-full lg:h-20 rounded-lg lg:rounded-none shadow lg:shadow-none lg:justify-between lg:hover:bg-gray-200">
                 <div className="flex items-center flex-grow">
@@ -20,20 +22,22 @@ const TrackPlaylist = ({ track }) => {
                     <p className="text-xs font-light truncate lg:mr-2">
                         {track.album}
                     </p>
-                    <button className="px-6">
-                        <img 
-                            src={removeTrackIcon}
-                            alt="Remove track"
-                            className="w-5 h-5"
-                        />
+                    <button 
+                        className="px-4" 
+                        onClick={() => {
+                            handleRemoveTrack(track);
+                        }}
+                    >
+                        <IoRemoveCircleOutline className='w-7 h-7 text-red-600 rounded-full hover:text-white hover:bg-red-600' />
                     </button>
                 </div>
-                <button className="p-4 lg:hidden">
-                    <img 
-                        src={removeTrackIcon}
-                        alt="Remove track"
-                        className="w-5 h-5"
-                    />
+                <button 
+                    className="p-4 lg:hidden" 
+                    onClick={() => {
+                        handleRemoveTrack(track);
+                    }}
+                >
+                    <IoIosRemoveCircle className='text-red-700 w-5 h-5' />
                 </button>
         </div>
     )

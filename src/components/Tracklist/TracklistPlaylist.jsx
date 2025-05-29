@@ -1,7 +1,7 @@
 import React from 'react'
 import TrackPlaylist from '../Track/TrackPlaylist'
 
-const TracklistPlaylist = ({ tracks }) => {
+const TracklistPlaylist = ({ tracks, handleRemoveTrack }) => {
     return (
         <div className="mb-8 lg:bg-gray-100 lg:rounded-lg font-thin text-lg w-full">
             <div className='flex items-center max-lg:hidden mb- py-4 px-2 justify-between border-b border-gray-300'>
@@ -15,9 +15,15 @@ const TracklistPlaylist = ({ tracks }) => {
             </div>
             <div className="max-w-7xl mx-auto overflow-y-auto h-[450px] lg:h-[700px]">
                 <div className="grid grid-cols-1 gap-3 lg:gap-0 w-full place-items-center">
-                    {tracks.map(track => (
-                        <TrackPlaylist key={track.id} track={track} />
-                    ))}
+                    {tracks.map(track => {
+                        return (
+                            <TrackPlaylist 
+                                key={track.id} 
+                                track={track} 
+                                handleRemoveTrack={handleRemoveTrack} 
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Tracklist from '../Tracklist/TracklistSearch'
 import PlaylistOn from './PlaylistOn'
 import PlaylistOff from './PlaylistOff'
 
@@ -27,97 +26,41 @@ const mockPlaylist = {
             image: 'https://geo-media.beatport.com/image_size/1400x1400/5e3daf40-a373-4057-9ccf-761a325391dd.jpg',
             id: '3'
         },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '4'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '5'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '6'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '7'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '8'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '9'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '10'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '2'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '2'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '2'
-        },
-        {
-            name: 'Levitating - Francis Mercier Remix',
-            artist: 'RÜFÜS DU SOL',
-            album: 'Inhale / Exhale Remixed',
-            image: 'https://i1.sndcdn.com/artworks-2Olc28jdGrL2-0-t500x500.jpg',
-            id: '2'
-        },
     ],
-    id: '12'
 }
 
-const Playlist = ({ newTrack }) => {
-
-    const [playlistActive, setPlaylistActive] = useState(false)
+const Playlist = ({ newTrack, playlistActive, setPlaylistActive, playlistTracks, setPlaylistTracks }) => {
     const [playlistName, setPlaylistName] = useState('')
-    const [playlistTracks, setPlaylistTracks] = useState(mockPlaylist.tracks)
 
-    // Update playlistTracks when newTrack is added
+    const handleRemoveTrack = (track) => {
+        setPlaylistTracks(prevTracks => {
+            const newTracks = prevTracks.filter(currentTrack => 
+                !(currentTrack.name === track.name && 
+                  currentTrack.artist === track.artist && 
+                  currentTrack.album === track.album)
+            );
+            return newTracks;
+        });
+    }
+
     useEffect(() => {
         if (newTrack) {
-            setPlaylistTracks(prevTracks => [...prevTracks, newTrack])
+            setPlaylistTracks(prevTracks => {
+                const trackExists = prevTracks.some(track => 
+                    track.name === newTrack.name && 
+                    track.artist === newTrack.artist && 
+                    track.album === newTrack.album
+                );
+
+                if (!trackExists) {
+                    const trackWithNewId = {
+                        ...newTrack,
+                        id: (prevTracks.length + 1).toString()
+                    }
+                    return [...prevTracks, trackWithNewId];
+                }
+                return prevTracks;
+            });
         }
     }, [newTrack])
 
@@ -133,13 +76,21 @@ const Playlist = ({ newTrack }) => {
         setPlaylistName(target.value)
     }
 
-
     return (
         <section className="mt-10 mx-auto max-w-[86rem] px-6 lg:px-18">
             {playlistActive === false ? (
-                <PlaylistOff playlistName={playlistName} changePlaylistName={changePlaylistName} togglePlaylist={togglePlaylist} />
+                <PlaylistOff 
+                    playlistName={playlistName} 
+                    changePlaylistName={changePlaylistName} 
+                    togglePlaylist={togglePlaylist} 
+                />
             ) : (
-                <PlaylistOn playlistName={playlistName} playlistTracks={playlistTracks} />
+                <PlaylistOn 
+                    playlistName={playlistName} 
+                    playlistTracks={playlistTracks} 
+                    handleRemoveTrack={handleRemoveTrack}
+                    changePlaylistName={changePlaylistName} 
+                />
             )}
         </section>
     )

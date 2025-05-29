@@ -1,7 +1,23 @@
-import React from 'react';
 import addTrackIcon from '../../assets/add-track.svg';
+import { IoIosAdd } from "react-icons/io"
+import React from 'react';
 
-const TrackSearch = ({ track }) => {
+const TrackSearch = ({ track, onTrackSelect, playlistActive, playlistTracks }) => {
+    
+    const isInPlaylist = playlistTracks.some(playlistTrack => 
+        playlistTrack.name === track.name && 
+        playlistTrack.artist === track.artist && 
+        playlistTrack.album === track.album
+    );
+
+    const handleClick = () => {
+        if (!isInPlaylist) {
+            onTrackSelect(track);
+        } else {
+            console.log('Track already in playlist:', track.name);
+        }
+    }
+
     return (
         <div className="bg-gray-100 text-dark-grey flex justify-between items-center rounded-lg lg:w-95 shadow">
             <div className="flex">
@@ -16,12 +32,12 @@ const TrackSearch = ({ track }) => {
                     <p className="text-xs font-light truncate">{track.album}</p>
                 </div>
             </div>
-            <button className="p-4">
-                <img 
-                    src={addTrackIcon}
-                    alt="Add track"
-                    className="w-7 h-7"
-                />
+            <button 
+                disabled={!playlistActive}
+                onClick={handleClick}
+                className={`p-4 ${playlistActive ? 'cursor-pointer' : 'cursor-auto'}`}
+            >
+                <IoIosAdd className={`w-7 h-7 rounded-full ${!isInPlaylist ? 'hover:bg-gray-300' : ''} ${isInPlaylist ? 'bg-spoti-green text-white hover' : ''} ${!playlistActive ? 'opacity-20' : ''}`}/>
             </button>
         </div>
     )
