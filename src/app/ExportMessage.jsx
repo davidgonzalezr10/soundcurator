@@ -6,22 +6,30 @@ const ExportMessage = ({ message }) => {
     const [displayMessage, setDisplayMessage] = useState('');
 
     useEffect(() => {
+        console.log('🔍 ExportMessage received message:', message);
+        
         if (message) {
+            // INCOMING MESSAGE - Show it
             setDisplayMessage(message);
             setShouldRender(true);
             // Small delay to ensure the element is rendered before starting fade in
             setTimeout(() => {
+                console.log('🔍 Starting fade IN animation');
                 setIsVisible(true);
             }, 10);
-        } else {
+            
+        } else if (displayMessage) {
+            // CLEARING MESSAGE - Only run fade-out if we actually have a message to clear
+            console.log('🔍 Starting fade OUT animation');
             setIsVisible(false);
             // Wait for fade out animation to complete before unmounting
             setTimeout(() => {
+                console.log('🔍 Fade out complete, unmounting');
                 setShouldRender(false);
                 setDisplayMessage('');
             }, 700); // Match this with the duration-700
         }
-    }, [message]);
+    }, [message]); // Remove displayMessage from dependency to avoid loops
 
     if (!shouldRender) return null;
 
